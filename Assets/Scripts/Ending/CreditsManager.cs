@@ -4,6 +4,9 @@ using System.Collections;
 public class CreditsManager : MonoBehaviour {
 
     float counter;
+    float soundFadeTimer = 33;
+    float fadeRate = 10;
+    float soundStopTimer = 38;
 
     public GameObject creditsCube;
 
@@ -30,13 +33,15 @@ public class CreditsManager : MonoBehaviour {
         creditsCube.SetActive(true);
         credits.Play();
 
-        if(counter >= 38){
+        if(counter >= soundStopTimer)
+        {
             credits.Stop();
             Application.LoadLevel(0);
         }
 
-        if(counter >= 33){
-            source.volume -= Time.deltaTime / 10;
+        if(counter >= soundFadeTimer)
+        {
+            source.volume -= Time.deltaTime / fadeRate;
         }
 
         if (Input.GetButtonDown("Jump"))
